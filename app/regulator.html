@@ -1,0 +1,73 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+			<h2>{{ message }}</h2>
+    <h6>Coinbase: {{ account }}</h6>
+    <h6>Regulator Address: {{ contractReg.address }} </h6>
+    <h4>BlockNumber: {{ blockNumber }}</h4>
+    </br>
+    <div class="panel panel-defualt">
+    <div class="panel-body">
+    <table class="table table-striped table-bordered">
+    <tr>
+      <th>Account Select</th>
+      <th>Set Vehicle Type</th>
+      <th>Create New Operator</th>
+    </tr>
+    <tr>
+      <th>
+        <select ng-model='accountSelect' ng-options='numAccount for numAccount in numAccounts'
+        ng-change="onAccountChange()">
+            <option value="">Select Account</option> required/></select>
+            <h6>Balance in ETH: {{ balanceInEth }} (ETH)</h6>
+            <h6>Balance in Wei: {{ balance }} (wei)</h6>
+      </th>
+      <th>
+        <form id="contributeForm" ng-submit="setVehicleType()">
+          Set Vehicle Type: <input type="type" name="vehicleType" ng-model="vehicleType" required/>
+          <input type="submit" class="btn btn-primary" value="Set Vehicle Type" />
+        </form>
+      </th>
+      <th>
+        <form id="contributeForm" ng-submit="createOperator()">
+          Operator Deposit: <input type="type" name="operatorDeposit" ng-model="operatorDeposit" required/>
+          <input type="submit" class="btn btn-primary" value="Create Operator" />
+        </form>
+      </th>
+    </tr>
+    </table>
+    </div>
+    </div>
+    <div class="panel panel-defualt">
+      <div class="panel-body">
+        <h4>Set Vehicle Type - Log</h4>
+        <table class="table table-striped table-bordered">
+        <tr>
+          <th>Vehicle Address</th>
+          <th>Vehicle Type</th>
+        </tr>
+        <tr ng-repeat="vehicle in vehicleLog">
+          <th>{{ vehicle.args.vehicle }}</th>
+          <th>{{ vehicle.args.vehicleType }}</th>
+        </tr>
+        </table>
+      </div>
+    <div class="panel panel-defualt">
+      <div class="panel-body">
+        <h4>New Operator - Log</h4>
+        <table class="table table-striped table-bordered">
+        <tr>
+          <th>TollBoothOperator Contract Address</th>
+          <th>Owner Address</th>
+          <th>Deposit</th>
+        </tr>
+        <tr ng-repeat="operator in operatorLog">
+          <th>{{ operator.args.newOperator }}</th>
+          <th>{{ operator.args.owner }}</th>
+          <th>{{ operator.args.depositWeis }}</th>
+        </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>{{ message }}</h2>
+      <select ng-model='operatorSelect' ng-options='numOperator for numOperator in numOperators'
+      ng-change="onOperatorChange()">
+          <option value="">Select Operator</option> required/></select>
+    <h6>TollBooth Operator Address: {{ TollBoothOperatorContract }} </h6>
+    <h6>TollBooth Owner Address: {{ TollBoothOperatorOwner }}</h6>
+    <h4>BlockNumber: {{ blockNumber }}</h4>
+    </br>
+    <div class="panel panel-defualt">
+    <div class="panel-body">
+    <table class="table table-striped table-bordered">
+    <tr>
+      <th>TollBooth Select</th>
+      <th>Exit TollBooth</th>
+    </tr>
+    <tr>
+      <th>
+        <select ng-model='accountSelect' ng-options='numTollBooth for numTollBooth in numTollBoothsExist'
+        ng-change="onAccountChange()">
+            <option value="">Select TollBooth</option> required/></select>
+      </th>
+      <th>
+        <form id="contributeForm" ng-submit="setVehicleExit()">
+          Secret Hash: <input type="type" name="secretHash" ng-model="secretHash" required/>
+          <br/>
+          <input type="submit" class="btn btn-primary" value="Exit TollBooth" />
+        </form>
+      </th>
+    </tr>
+    </table>
+    </div>
+    </div>
+
+    <div class="panel panel-defualt">
+    <div class="panel panel-defualt">
+      <div class="panel-body">
+        <h4>Exit - Log</h4>
+        <table class="table table-striped table-bordered">
+        <tr>
+          <th>Exit TollBooth</th>
+          <th>Secret Hash</th>
+          <th>Final Fee</th>
+          <th>Refund</th>
+        </tr>
+        <tr ng-repeat="numVehicleExit in numVehiclesExit">
+          <th>{{ numVehicleExit.args.exitBooth }}</th>
+          <th>{{ numVehicleExit.args.exitSecretHashed }}</th>
+          <th>{{ numVehicleExit.args.finalFee }}</th>
+          <th>{{ numVehicleExit.args.refundWeis }}</th>
+        </tr>
+        </table>
+      </div>
+      <div class="panel-body">
+        <h4>Pending Payment - Log</h4>
+        <table class="table table-striped table-bordered">
+        <tr>
+          <th>Entry TollBooth</th>
+          <th>Exit TollBooth</th>
+          <th>Secret Hash</th>
+        </tr>
+        <tr ng-repeat="numPendingPayment in numPendingPayments">
+          <th>{{ numPendingPayment.args.entryBooth }}</th>
+          <th>{{ numPendingPayment.args.exitBooth }}</th>
+          <th>{{ numPendingPayment.args.exitSecretHashed }}</th>
+        </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
